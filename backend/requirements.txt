@@ -1,0 +1,29 @@
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.30
+sqlalchemy>=2.0,<3.0
+pydantic>=2.6,<3.0
+scikit-learn>=1.8,<1.9   # model pickles in artifacts/ were saved with 1.8.x
+xgboost>=3.0,<4.0        # model pickles in artifacts/ were saved with 3.x
+pandas>=2.0,<3.0
+numpy>=1.26,<2.4
+
+# database
+psycopg2-binary>=2.9   # Postgres driver; DATABASE_URL selects sqlite vs postgres
+
+# scheduling (automatic PhishTank/OpenPhish sync, no manual dataset uploads)
+apscheduler>=3.10,<4.0
+
+# ML
+torch>=2.2
+
+# evidence collectors
+dnspython>=2.6
+python-whois>=0.9
+cryptography>=42
+requests>=2.31
+
+# reports
+reportlab>=4.0
+
+# optional: not required to run the app
+# redis             # if you wire up background job queuing

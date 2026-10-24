@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.env
+*.db
+.pytest_cache/
+tests/
+generated_reports/
+# Training-time data only; the live API never reads these
+datasets/historical_sources/
+datasets/synthetic/

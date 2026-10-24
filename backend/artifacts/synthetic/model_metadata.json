@@ -1,0 +1,318 @@
+{
+  "generated_at": "2026-10-24T02:42:41.142142+00:00",
+  "feature_version": "synthetic_features_v1",
+  "feature_names": [
+    "brand_exact_unofficial_domain",
+    "brand_official_domain",
+    "brand_token_count",
+    "digit_ratio",
+    "double_slash_in_path",
+    "has_at_symbol",
+    "has_https",
+    "has_ip_host",
+    "has_port",
+    "has_url_in_query",
+    "host_brand_unofficial",
+    "host_entropy",
+    "host_length",
+    "host_lure_word_count",
+    "hyphen_in_host",
+    "is_free_hosting",
+    "is_private_ip",
+    "is_shortened",
+    "known_shortener",
+    "leet_brand_match",
+    "long_hex_token",
+    "long_host",
+    "malformed_query_syntax",
+    "near_brand_typosquat",
+    "nonstandard_port",
+    "num_digits",
+    "num_dots",
+    "num_hyphens",
+    "num_query_params",
+    "num_underscores",
+    "path_brand_unofficial",
+    "path_dangerous_ext",
+    "path_depth",
+    "path_digit_ratio",
+    "path_entropy",
+    "path_html_ext",
+    "path_length",
+    "path_lure_word_count",
+    "path_script_ext",
+    "punycode",
+    "query_length",
+    "redirect_cross_domain",
+    "sld_digit_ratio",
+    "sld_entropy",
+    "sld_length",
+    "sld_max_consonant_run",
+    "sld_vowel_ratio",
+    "subdomain_brand_unofficial",
+    "subdomain_count",
+    "suspicious_word_count",
+    "tld_cheap",
+    "tld_common",
+    "tld_length",
+    "url_length",
+    "userinfo_in_netloc"
+  ],
+  "training_data": "datasets/synthetic/synthetic_urls.csv (fully synthetic; real datasets not used for fitting)",
+  "split_strategy": "domain_disjoint",
+  "random_seed": 42,
+  "dataset_sizes": {
+    "train": 57792,
+    "val": 10765,
+    "test": 11443,
+    "alt_seed_corpus": 30000,
+    "real_hard_negatives": 67
+  },
+  "ensemble_threshold": 0.36,
+  "models": {
+    "random_forest": {
+      "locked_threshold": 0.35,
+      "evaluations": {
+        "synthetic_domain_disjoint_test": {
+          "n": 11443,
+          "accuracy": 0.9728,
+          "balanced_accuracy": 0.9727,
+          "precision": 0.9717,
+          "recall": 0.9761,
+          "f1": 0.9739,
+          "mcc": 0.9456,
+          "false_positive_rate": 0.0307,
+          "false_negative_rate": 0.0239,
+          "confusion_matrix": {
+            "tn": 5332,
+            "fp": 169,
+            "fn": 142,
+            "tp": 5800
+          },
+          "roc_auc": 0.9975,
+          "brier_score": 0.0244
+        },
+        "synthetic_alt_seed_corpus": {
+          "n": 30000,
+          "accuracy": 0.9647,
+          "balanced_accuracy": 0.9647,
+          "precision": 0.9508,
+          "recall": 0.9802,
+          "f1": 0.9653,
+          "mcc": 0.9299,
+          "false_positive_rate": 0.0507,
+          "false_negative_rate": 0.0198,
+          "confusion_matrix": {
+            "tn": 14239,
+            "fp": 761,
+            "fn": 297,
+            "tp": 14703
+          },
+          "roc_auc": 0.9968,
+          "brier_score": 0.026
+        },
+        "real_hard_negatives_sanity": {
+          "n": 67,
+          "accuracy": 0.9254,
+          "balanced_accuracy": 0.9254,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "mcc": null,
+          "false_positive_rate": 0.0746,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 62,
+            "fp": 5,
+            "fn": 0,
+            "tp": 0
+          }
+        }
+      }
+    },
+    "xgboost": {
+      "locked_threshold": 0.4,
+      "evaluations": {
+        "synthetic_domain_disjoint_test": {
+          "n": 11443,
+          "accuracy": 0.9858,
+          "balanced_accuracy": 0.9858,
+          "precision": 0.9877,
+          "recall": 0.9849,
+          "f1": 0.9863,
+          "mcc": 0.9715,
+          "false_positive_rate": 0.0133,
+          "false_negative_rate": 0.0151,
+          "confusion_matrix": {
+            "tn": 5428,
+            "fp": 73,
+            "fn": 90,
+            "tp": 5852
+          },
+          "roc_auc": 0.9993,
+          "brier_score": 0.01
+        },
+        "synthetic_alt_seed_corpus": {
+          "n": 30000,
+          "accuracy": 0.9768,
+          "balanced_accuracy": 0.9768,
+          "precision": 0.973,
+          "recall": 0.9807,
+          "f1": 0.9769,
+          "mcc": 0.9536,
+          "false_positive_rate": 0.0272,
+          "false_negative_rate": 0.0193,
+          "confusion_matrix": {
+            "tn": 14592,
+            "fp": 408,
+            "fn": 289,
+            "tp": 14711
+          },
+          "roc_auc": 0.9986,
+          "brier_score": 0.0146
+        },
+        "real_hard_negatives_sanity": {
+          "n": 67,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "mcc": null,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 67,
+            "fp": 0,
+            "fn": 0,
+            "tp": 0
+          }
+        }
+      }
+    },
+    "svm": {
+      "locked_threshold": 0.54,
+      "evaluations": {
+        "synthetic_domain_disjoint_test": {
+          "n": 11443,
+          "accuracy": 0.9604,
+          "balanced_accuracy": 0.9608,
+          "precision": 0.9733,
+          "recall": 0.9498,
+          "f1": 0.9614,
+          "mcc": 0.9211,
+          "false_positive_rate": 0.0282,
+          "false_negative_rate": 0.0502,
+          "confusion_matrix": {
+            "tn": 5346,
+            "fp": 155,
+            "fn": 298,
+            "tp": 5644
+          },
+          "roc_auc": 0.9918,
+          "brier_score": 0.0311
+        },
+        "synthetic_alt_seed_corpus": {
+          "n": 30000,
+          "accuracy": 0.9572,
+          "balanced_accuracy": 0.9572,
+          "precision": 0.9662,
+          "recall": 0.9475,
+          "f1": 0.9567,
+          "mcc": 0.9145,
+          "false_positive_rate": 0.0331,
+          "false_negative_rate": 0.0525,
+          "confusion_matrix": {
+            "tn": 14503,
+            "fp": 497,
+            "fn": 788,
+            "tp": 14212
+          },
+          "roc_auc": 0.9916,
+          "brier_score": 0.0328
+        },
+        "real_hard_negatives_sanity": {
+          "n": 67,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "mcc": null,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 67,
+            "fp": 0,
+            "fn": 0,
+            "tp": 0
+          }
+        }
+      }
+    },
+    "ensemble_mean": {
+      "locked_threshold": 0.36,
+      "evaluations": {
+        "synthetic_domain_disjoint_test": {
+          "n": 11443,
+          "accuracy": 0.9794,
+          "balanced_accuracy": 0.9792,
+          "precision": 0.9774,
+          "recall": 0.983,
+          "f1": 0.9802,
+          "mcc": 0.9587,
+          "false_positive_rate": 0.0245,
+          "false_negative_rate": 0.017,
+          "confusion_matrix": {
+            "tn": 5366,
+            "fp": 135,
+            "fn": 101,
+            "tp": 5841
+          },
+          "roc_auc": 0.9984,
+          "brier_score": 0.0175
+        },
+        "synthetic_alt_seed_corpus": {
+          "n": 30000,
+          "accuracy": 0.9722,
+          "balanced_accuracy": 0.9722,
+          "precision": 0.963,
+          "recall": 0.9821,
+          "f1": 0.9725,
+          "mcc": 0.9446,
+          "false_positive_rate": 0.0377,
+          "false_negative_rate": 0.0179,
+          "confusion_matrix": {
+            "tn": 14434,
+            "fp": 566,
+            "fn": 268,
+            "tp": 14732
+          },
+          "roc_auc": 0.9977,
+          "brier_score": 0.0204
+        },
+        "real_hard_negatives_sanity": {
+          "n": 67,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "mcc": null,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 67,
+            "fp": 0,
+            "fn": 0,
+            "tp": 0
+          }
+        }
+      }
+    }
+  },
+  "notes": [
+    "Primary scorer. The original real-data models in artifacts/ are the backup (see app/models/classifier.py).",
+    "Accuracy figures describe synthetic data. real_hard_negatives_sanity is a small read-only check on real URLs, not a real-world accuracy claim."
+  ]
+}

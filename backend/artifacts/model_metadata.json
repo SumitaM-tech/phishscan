@@ -1,0 +1,193 @@
+{
+  "generated_at": "2026-09-25T21:20:52.403494+00:00",
+  "feature_version": "url_features_v1_host_only_19feat",
+  "feature_names": [
+    "brand_token_count",
+    "digit_ratio",
+    "has_at_symbol",
+    "has_https",
+    "has_ip_host",
+    "has_port",
+    "host_entropy",
+    "host_length",
+    "hyphen_in_host",
+    "is_shortened",
+    "long_host",
+    "malformed_query_syntax",
+    "num_digits",
+    "num_dots",
+    "num_hyphens",
+    "num_underscores",
+    "punycode",
+    "subdomain_count",
+    "suspicious_word_count",
+    "tld_length"
+  ],
+  "split_strategy_deployed": "domain_disjoint",
+  "random_seed": 42,
+  "dataset_sizes": {
+    "train": 313580,
+    "val": 63534,
+    "test": 66245,
+    "test_random": null,
+    "test_temporal": null,
+    "hard_negatives": 67
+  },
+  "models": {
+    "random_forest": {
+      "thresholds": {
+        "high_precision": 0.915,
+        "balanced": 0.55,
+        "high_recall": 0.11
+      },
+      "locked_threshold": 0.55,
+      "evaluations": {
+        "domain_disjoint_test": {
+          "n": 66245,
+          "accuracy": 0.8975,
+          "balanced_accuracy": 0.8741,
+          "precision": 0.9438,
+          "recall": 0.7766,
+          "f1": 0.8521,
+          "mcc": 0.7833,
+          "false_positive_rate": 0.0284,
+          "false_negative_rate": 0.2234,
+          "confusion_matrix": {
+            "tn": 39890,
+            "fp": 1165,
+            "fn": 5628,
+            "tp": 19562
+          },
+          "roc_auc": 0.928,
+          "pr_auc": 0.9285,
+          "brier_score": 0.0853
+        },
+        "hard_negatives": {
+          "n": 67,
+          "accuracy": 0.9104,
+          "balanced_accuracy": 0.9104,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "mcc": null,
+          "false_positive_rate": 0.0896,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 61,
+            "fp": 6,
+            "fn": 0,
+            "tp": 0
+          },
+          "roc_auc": NaN,
+          "pr_auc": 0.0,
+          "brier_score": 0.0885
+        }
+      }
+    },
+    "xgboost": {
+      "thresholds": {
+        "high_precision": 0.91,
+        "balanced": 0.585,
+        "high_recall": 0.06
+      },
+      "locked_threshold": 0.585,
+      "evaluations": {
+        "domain_disjoint_test": {
+          "n": 66245,
+          "accuracy": 0.8919,
+          "balanced_accuracy": 0.8636,
+          "precision": 0.9617,
+          "recall": 0.7455,
+          "f1": 0.8399,
+          "mcc": 0.7744,
+          "false_positive_rate": 0.0182,
+          "false_negative_rate": 0.2545,
+          "confusion_matrix": {
+            "tn": 40308,
+            "fp": 747,
+            "fn": 6412,
+            "tp": 18778
+          },
+          "roc_auc": 0.934,
+          "pr_auc": 0.9324,
+          "brier_score": 0.0805
+        },
+        "hard_negatives": {
+          "n": 67,
+          "accuracy": 0.9104,
+          "balanced_accuracy": 0.9104,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "mcc": null,
+          "false_positive_rate": 0.0896,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 61,
+            "fp": 6,
+            "fn": 0,
+            "tp": 0
+          },
+          "roc_auc": NaN,
+          "pr_auc": 0.0,
+          "brier_score": 0.0989
+        }
+      }
+    },
+    "svm": {
+      "thresholds": {
+        "high_precision": 0.965,
+        "balanced": 0.79,
+        "high_recall": 0.065
+      },
+      "locked_threshold": 0.79,
+      "evaluations": {
+        "domain_disjoint_test": {
+          "n": 66245,
+          "accuracy": 0.8837,
+          "balanced_accuracy": 0.8548,
+          "precision": 0.9485,
+          "recall": 0.7339,
+          "f1": 0.8276,
+          "mcc": 0.7558,
+          "false_positive_rate": 0.0244,
+          "false_negative_rate": 0.2661,
+          "confusion_matrix": {
+            "tn": 40052,
+            "fp": 1003,
+            "fn": 6702,
+            "tp": 18488
+          },
+          "roc_auc": 0.9035,
+          "pr_auc": 0.9035,
+          "brier_score": 0.0966
+        },
+        "hard_negatives": {
+          "n": 67,
+          "accuracy": 0.8955,
+          "balanced_accuracy": 0.8955,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "mcc": null,
+          "false_positive_rate": 0.1045,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 60,
+            "fp": 7,
+            "fn": 0,
+            "tp": 0
+          },
+          "roc_auc": NaN,
+          "pr_auc": 0.0,
+          "brier_score": 0.1162
+        }
+      }
+    }
+  },
+  "known_limitations": [
+    "GNN infrastructure model could not be trained on real DNS/RDAP/TLS/CT graph data in this sandboxed environment (no live network access to those services here) -- see README.",
+    "Hard-negative set is a small (66-URL) hand-curated list of real, well-known branded URLs, not a large crawled sample -- adequate to catch gross login/verify-keyword shortcuts, not a substitute for a large real-world red-team URL corpus.",
+    "Temporal split is fully real only for the phishing class (PhishTank submission_time); the legitimate class (PhiUSIIL) carries no timestamp, so temporal drift in legitimate site structure is not measured."
+  ]
+}

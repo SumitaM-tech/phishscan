@@ -1,0 +1,15 @@
+# Render Blueprint: New > Blueprint > pick this repo. Deploys the API only;
+# the frontend goes on Vercel (see DEPLOY.md).
+services:
+  - type: web
+    name: phishscan-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: starter            # torch + sklearn + xgboost need ~1 GB RAM; free (512 MB) may OOM
+    healthCheckPath: /api/health
+    envVars:
+      - key: CORS_ORIGINS
+        sync: false          # you'll be prompted: paste your Vercel URL, e.g. https://phishscan.vercel.app
+      - key: SYNC_ON_STARTUP
+        value: "true"

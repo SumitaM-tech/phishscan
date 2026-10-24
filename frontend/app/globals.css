@@ -1,0 +1,182 @@
+@import "tailwindcss";
+@import "@xyflow/react/dist/style.css";
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/SpaceGrotesk-Variable.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Variable.woff2") format("woff2");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Obsidian + graphite + smoked-violet — the default and primary theme. */
+  --bg: #09080d;
+  --surface: #121019;
+  --surface-2: #17141e;
+  --surface-3: #201b2b;
+  --line: #2a2435;
+  --line-strong: #3d3549;
+  --text: #ece9f5;
+  --muted: #9891ab;
+  --faint: #6b6480;
+  --accent: #8577ea;
+  --accent-strong: #a89bff;
+  --accent-soft: #1e1a34;
+  --accent-gradient: linear-gradient(135deg, #9c8ffb 0%, #7a6ce6 50%, #5b4bc4 100%);
+  --danger: #e2708a;
+  --danger-soft: #2a1620;
+  --warning: #dfa561;
+  --warning-soft: #2a2015;
+  --success: #5cc99b;
+  --success-soft: #12261f;
+  --shadow: 0 24px 70px rgba(3, 2, 8, 0.55);
+  --sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 40%);
+  --font-sans: "Space Grotesk", "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f4f2f8;
+  --surface: #ffffff;
+  --surface-2: #f7f5fb;
+  --surface-3: #ece8f4;
+  --line: #e1dcea;
+  --line-strong: #cec5e0;
+  --text: #1a1625;
+  --muted: #665f7c;
+  --faint: #948ca6;
+  --accent: #6d5ce0;
+  --accent-strong: #5747c7;
+  --accent-soft: #ece7fb;
+  --accent-gradient: linear-gradient(135deg, #8577ea 0%, #6d5ce0 55%, #5342b8 100%);
+  --danger: #cf3f60;
+  --danger-soft: #fbe7ec;
+  --warning: #b8720f;
+  --warning-soft: #faf0de;
+  --success: #1c8f63;
+  --success-soft: #e1f5ec;
+  --shadow: 0 18px 45px rgba(40, 24, 64, 0.1);
+  --sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 40%);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--bg); scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image: radial-gradient(1100px 520px at 12% -8%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 60%);
+  background-repeat: no-repeat;
+  color: var(--text);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  min-height: 100vh;
+  letter-spacing: -0.011em;
+}
+button, input, select { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+::selection { background: var(--accent); color: #0a0710; }
+
+.mono { font-family: var(--font-mono), ui-monospace, monospace; letter-spacing: -0.01em; }
+.page-wrap { width: min(1480px, calc(100% - 48px)); margin-inline: auto; }
+
+.panel {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.panel-raised {
+  position: relative;
+  background: var(--surface);
+  background-image: var(--sheen);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.eyebrow { color: var(--accent); font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.muted { color: var(--muted); }
+
+/* Shiny primary action: gradient fill, glass highlight on top edge, soft
+   accent glow, gentle lift on hover — the one deliberately "loud" element
+   per page, reserved for the primary call to action. */
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--accent-strong) 55%, transparent);
+  background: var(--accent-gradient);
+  color: #fbfaff;
+  font-weight: 600;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 10px 30px -8px color-mix(in srgb, var(--accent) 65%, transparent);
+  transition: transform 150ms ease, box-shadow 150ms ease, filter 150ms ease;
+}
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 14px 36px -8px color-mix(in srgb, var(--accent) 75%, transparent);
+}
+.btn-primary:active:not(:disabled) { transform: translateY(0); filter: brightness(0.98); }
+.btn-primary:disabled { opacity: 0.6; cursor: wait; }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-2);
+  color: var(--text);
+  font-weight: 600;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.btn-secondary:hover { border-color: var(--accent); background: var(--surface-3); }
+
+.glow-orb {
+  position: absolute;
+  border-radius: 999px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 55%, transparent) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.technical-grid {
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+.status-dot { width: 7px; height: 7px; border-radius: 999px; background: currentColor; box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 16%, transparent); }
+.scrollbar { scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent; }
+.react-flow__attribution { display: none; }
+.react-flow__background { background: var(--surface-2); }
+.react-flow__controls { border: 1px solid var(--line); box-shadow: none; }
+.react-flow__controls-button { background: var(--surface); color: var(--text); border-color: var(--line); }
+.react-flow__controls-button:hover { background: var(--surface-3); }
+.react-flow__minimap { background: var(--surface) !important; border: 1px solid var(--line); }
+.density-compact .density-pad { padding-top: 12px; padding-bottom: 12px; }
+
+@media (max-width: 768px) {
+  .page-wrap { width: min(100% - 28px, 1480px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+

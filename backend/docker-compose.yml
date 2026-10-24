@@ -1,0 +1,46 @@
+version: "3.9"
+
+# Stands up the Postgres instance the architecture calls for. The API
+# itself still runs with `uvicorn` on the host (or `docker compose up api`
+# if you'd rather run everything containerized) -- this file's job is
+# just to make "PostgreSQL database" a one-command reality instead of a
+# manual install.
+#
+# Usage:
+#   docker compose up -d db
+#   export DATABASE_URL=postgresql+psycopg2://phishscan:phishscan@localhost:5432/phishscan
+#   uvicorn app.main:app --reload --port 8000
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: phishscan
+      POSTGRES_PASSWORD: phishscan
+      POSTGRES_DB: phishscan
+    ports:
+      - "5432:5432"
+    volumes:
+      - phishscan_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U phishscan"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg2://phishscan:phishscan@db:5432/phishscan
+      CORS_ORIGINS: http://localhost:3000
+    ports:
+      - "8000:8000"
+    profiles: ["full"]  # `docker compose --profile full up` to run the API in a container too
+
+volumes:
+  phishscan_pgdata:

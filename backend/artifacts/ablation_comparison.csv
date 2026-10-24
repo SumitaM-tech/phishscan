@@ -1,0 +1,7 @@
+model,accuracy,precision,recall,f1,roc_auc
+random_forest,0.8998,0.9245,0.8102,0.8636,0.9319
+xgboost,0.9049,0.9506,0.7987,0.868,0.9412
+svm,0.8692,0.8795,0.7718,0.8221,0.8865
+transformer_only,0.8789,,,0.8192,0.9274
+gnn_only,0.6089,,,0.0,0.5
+hybrid_fusion,0.9356,,,0.9108,0.972
